@@ -65,7 +65,8 @@ class WeekWrapper extends React.Component {
 
     const slot = getSlotAtX(
       bounds,
-      point.x - this.eventOffsetLeft,
+      // point.x - this.eventOffsetLeft,  /*Dnd: Offset is not needed #1892 tiwatson commit*/
+      point.x,
       rtl,
       slotMetrics.slots
     )
@@ -167,7 +168,7 @@ class WeekWrapper extends React.Component {
       // delta from this point. note: if we want to DRY this with
       // EventContainerWrapper, probably better just to capture the mouseDown
       // point here and do the placement computation in handleMove()...
-      this.eventOffsetLeft = point.x - bounds.left
+      // this.eventOffsetLeft = point.x - bounds.left
 
       const isInBox = pointInBox(bounds, point)
       return (
