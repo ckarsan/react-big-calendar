@@ -52,7 +52,7 @@
     "prepublishOnly": "npm run build",
     "prettier": "prettier '**/*js' !examples/bundle.js '!lib/**' --write ",
     "precommit": "lint-staged",
-    "postinstall": "cd ./node_modules/react-tackle-box && yarn && yarn build"
+    "postinstall": "cd ./node_modules/react-tackle-box && npm install && npm run build"
   },
   "lint-staged": {
     "src/**/*.js": "eslint",
