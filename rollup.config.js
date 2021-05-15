@@ -33,9 +33,9 @@ export default [
     },
     external: Object.keys(globals),
     plugins: [
-      nodeResolve(),
       babel(babelOptions),
       commonjs(commonjsOptions),
+      nodeResolve(),
       replace({ 'process.env.NODE_ENV': JSON.stringify('development') }),
       sizeSnapshot(),
     ],
