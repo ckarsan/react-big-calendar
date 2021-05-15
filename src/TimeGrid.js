@@ -27,11 +27,11 @@ export default class TimeGrid extends Component {
     this._scrollRatio = null
   }
 
-  UNSAFE_componentWillMount() {
+  UNSAFE_componentWillMount = () => {
     this.calculateScroll()
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     this.checkOverflow()
 
     if (this.props.width == null) {
@@ -43,7 +43,7 @@ export default class TimeGrid extends Component {
     window.addEventListener('resize', this.handleResize)
   }
 
-  handleScroll = e => {
+  handleScroll = (e) => {
     if (this.scrollRef.current) {
       this.scrollRef.current.scrollLeft = e.target.scrollLeft
     }
@@ -54,7 +54,7 @@ export default class TimeGrid extends Component {
     this.rafHandle = animationFrame.request(this.checkOverflow)
   }
 
-  componentWillUnmount() {
+  componentWillUnmount = () => {
     window.removeEventListener('resize', this.handleResize)
 
     animationFrame.cancel(this.rafHandle)
@@ -64,7 +64,7 @@ export default class TimeGrid extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate = () => {
     if (this.props.width == null) {
       this.measureGutter()
     }
@@ -73,7 +73,7 @@ export default class TimeGrid extends Component {
     //this.checkOverflow()
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps = (nextProps) => {
     const { range, scrollToTime } = this.props
     // When paginating, reset scroll
     if (
@@ -84,7 +84,7 @@ export default class TimeGrid extends Component {
     }
   }
 
-  gutterRef = ref => {
+  gutterRef = (ref) => {
     this.gutter = ref && findDOMNode(ref)
   }
 
@@ -106,14 +106,8 @@ export default class TimeGrid extends Component {
   }
 
   renderEvents(range, events, backgroundEvents, now) {
-    let {
-      min,
-      max,
-      components,
-      accessors,
-      localizer,
-      dayLayoutAlgorithm,
-    } = this.props
+    let { min, max, components, accessors, localizer, dayLayoutAlgorithm } =
+      this.props
 
     const resources = this.memoizedResources(this.props.resources, accessors)
     const groupedEvents = resources.groupEvents(events)
@@ -121,7 +115,7 @@ export default class TimeGrid extends Component {
 
     return resources.map(([id, resource], i) =>
       range.map((date, jj) => {
-        let daysEvents = (groupedEvents.get(id) || []).filter(event =>
+        let daysEvents = (groupedEvents.get(id) || []).filter((event) =>
           dates.inRange(
             date,
             accessors.start(event),
@@ -132,7 +126,7 @@ export default class TimeGrid extends Component {
 
         let daysBackgroundEvents = (
           groupedBackgroundEvents.get(id) || []
-        ).filter(event =>
+        ).filter((event) =>
           dates.inRange(
             date,
             accessors.start(event),
@@ -193,7 +187,7 @@ export default class TimeGrid extends Component {
       rangeEvents = [],
       rangeBackgroundEvents = []
 
-    events.forEach(event => {
+    events.forEach((event) => {
       if (inRange(event, start, end, accessors)) {
         let eStart = accessors.start(event),
           eEnd = accessors.end(event)
@@ -210,7 +204,7 @@ export default class TimeGrid extends Component {
       }
     })
 
-    backgroundEvents.forEach(event => {
+    backgroundEvents.forEach((event) => {
       if (inRange(event, start, end, accessors)) {
         rangeBackgroundEvents.push(event)
       }
