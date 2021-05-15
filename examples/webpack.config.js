@@ -28,7 +28,7 @@ module.exports = {
       rules.js({}),
       rules.images(),
       rules.fonts(),
-      { oneOf: [rules.css.modules(), rules.css()] },
+      { oneOf: [rules.css()] },
       rules.sass({ browsers }),
       {
         test: /\.md/,
